@@ -1,0 +1,61 @@
+#auth{
+  width: 100vw;
+  display:block;
+  height: 100vh;
+  background-image: url('../../assets/images/money-savings-bg.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.auth-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 515.4px;
+  height: 458.7px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+.email-form{
+  /* padding-top:37.35px; */
+  padding-bottom: 30.44px;
+}
+h2{
+  font-family:'Alata-Regular';
+  font-size: 40px;
+  line-height: 55.2px;
+  height: 55px;
+}
+input{
+  width: 329.01px;
+  height: 55px;
+  font-family: 'Space-Grotesk';
+  font-size: 18px;
+  padding-left: 18.09px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid #333333;
+}
+.password-form{
+  position: relative;
+}
+.password-form img{
+  position: absolute;
+  right:12.06px;
+  top:13.18px;
+  cursor:pointer;
+  width: 28.65px;
+}
+.login-btn button{
+  width: 349.1px;
+  height: 55px;
+  font-size: 18px;
+  border: 0px;
+  background-color: #B9E2E6;
+  border-radius: 10px;
+  margin-top: 34.76px;
+  cursor:pointer;
+}
