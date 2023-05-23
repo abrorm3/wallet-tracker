@@ -11,7 +11,8 @@
         <img (click)="viewpassword()" [src]="visible?'assets/icons/eye-icon.svg':'assets/icons/eye-closed-icon.svg'" alt="eye icon">
       </div>
       <div class="login-btn">
-        <button type="submit">Login</button>
+        <button type="submit" [disabled]="!authForm.valid">{{isLoginMode?'Login':'Sign Up'}}</button>
+        <a class="switchLoginModeButton" >Switch to <span class="modeHighlight" (click)="onSwitchMode()">{{isLoginMode?'Sign Up':'Login'}}</span></a>
       </div>
     </form>
   </div>
