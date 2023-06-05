@@ -1,3 +1,4 @@
+
 #auth{
   width: 100vw;
   display:block;
@@ -9,8 +10,10 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
 .auth-box{
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -73,4 +76,20 @@ input{
   color:#2e9097;
   cursor:pointer;
 
+}
+.loadingSpinner{
+  height: 238px;
+  text-align: center;
+}
+.error{
+  position: absolute;
+  top: 137px;
+  background-color: #f3dfdf;
+  color:#dc3545;
+  border: 1px, solid,#dc3545;
+  border-radius: 3px;
+}
+.error p{
+  margin: 5px 15px;
+  font-size: 12px;
 }

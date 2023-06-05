@@ -1,14 +1,20 @@
 <div id="auth">
   <div class="auth-box">
     <h2>Wallet Tracker</h2>
-    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="error" *ngIf="error">
+      <p>{{error}}</p>
+    </div>
+    <div class="loadingSpinner" *ngIf="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="email-form">
         <!-- <label for="email">Emailsss</label> -->
         <input type="email" id="email" ngModel email required name="email" placeholder="Email">
       </div>
       <div class="password-form">
         <input [type]="changetype?'password':'text'" id="email" ngModel name="password" required minlength="6" placeholder="Password">
-        <img (click)="viewpassword()" [src]="visible?'assets/icons/eye-icon.svg':'assets/icons/eye-closed-icon.svg'" alt="eye icon">
+        <img (click)="viewpassword()" [src]="visible?'assets/icons/eye-closed-icon.svg':'assets/icons/eye-icon.svg'" alt="eye icon">
       </div>
       <div class="login-btn">
         <button type="submit" [disabled]="!authForm.valid">{{isLoginMode?'Login':'Sign Up'}}</button>
