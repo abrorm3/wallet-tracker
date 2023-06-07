@@ -13,8 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/Users/abrormukhammadiev/Desktop/IT/wallet-tracker/wallet-tracker",
-            "outputPath": "dist/wallet-tracker",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
