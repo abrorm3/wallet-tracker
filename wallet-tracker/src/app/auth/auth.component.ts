@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import{AuthService} from "./auth.service";
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private router: Router){}
 
   private subscription: Subscription | undefined;
   ngOnDestroy() {
@@ -44,6 +45,7 @@ export class AuthComponent {
         next: (resData) => {
           console.log(resData);
           this.isLoading = false;
+          this.router.navigate(['/main'])
         },
         error: (errorMessage) => {
           console.log(errorMessage);
@@ -57,6 +59,7 @@ export class AuthComponent {
         next: (resData) => {
           console.log(resData);
           this.isLoading = false;
+          this.router.navigate(['/main'])
         },
         error: (errorMessage) => {
           console.log(errorMessage);

@@ -1,0 +1,11 @@
+<ul class="cards">§
+  <li *ngFor="let card of cards">
+    <button type="button" [class.selected]="card === selectedCard"  (click)="onSelect(card)">
+    <h3 class="typeName">{{card.typeName}}</h3>
+    <h3 class="amount">{{card.amount}}</h3>
+    <span>
+      <img [src]="card.currencyImagePath" alt="currency" style="max-height: 50px;">
+    </span>
+  </button>
+  </li>
+</ul>
