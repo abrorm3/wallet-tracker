@@ -1,0 +1,12 @@
+
+#sections ul{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+#sections li:not(:first-child) a{
+  padding-left:30px ;
+}
+#sections li a{
+  color:#373737;
+}

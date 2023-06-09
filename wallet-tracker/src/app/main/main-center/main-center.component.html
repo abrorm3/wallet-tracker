@@ -1,0 +1,21 @@
+<div id="main-center">
+  <div id="sections">
+    <ul>
+      <li *ngFor="let section of sections">
+        <a (click)="selectSection(section)">{{ section }}</a>
+      </li>
+    </ul>
+  </div>
+    <div *ngIf="selectedSection === 'Categories'" class="">
+      <app-sec-categories></app-sec-categories></div>
+    <div *ngIf="selectedSection === 'Subscriptions'" class="">
+      <app-sec-subscriptions></app-sec-subscriptions></div>
+    <div *ngIf="selectedSection === 'Obligatory'" class="">
+      <app-sec-obligatory></app-sec-obligatory></div>
+    <div *ngIf="selectedSection === 'Statistic'" class="">
+      <app-sec-statistic></app-sec-statistic></div>
+    <div *ngIf="selectedSection === 'Admin'" class="">
+      <app-sec-admin></app-sec-admin></div>
+  <div id="search"></div>
+  <div id="transactions"></div>
+</div>

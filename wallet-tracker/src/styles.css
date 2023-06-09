@@ -9,3 +9,13 @@
   src: url(/assets/fonts/SpaceGrotesk-VariableFont_wght.ttf) format('truetype');
   font-weight: 400;
 }
+*{
+  font-family: Alata-Regular;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}

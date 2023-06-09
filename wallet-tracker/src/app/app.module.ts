@@ -9,6 +9,12 @@ import {HttpClientModule} from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
 import { MainComponent } from './main/main.component';
 import { CardsComponent } from './main/cards/cards.component';
+import { MainCenterComponent } from './main/main-center/main-center.component';
+import { SecCategoriesComponent } from './main/main-center/sec-categories/sec-categories.component';
+import { SecSubscriptionsComponent } from './main/main-center/sec-subscriptions/sec-subscriptions.component';
+import { SecObligatoryComponent } from './main/main-center/sec-obligatory/sec-obligatory.component';
+import { SecStatisticComponent } from './main/main-center/sec-statistic/sec-statistic.component';
+import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +22,13 @@ import { CardsComponent } from './main/cards/cards.component';
     AuthComponent,
     LoadingSpinnerComponent,
     MainComponent,
-    CardsComponent
+    CardsComponent,
+    MainCenterComponent,
+    SecCategoriesComponent,
+    SecSubscriptionsComponent,
+    SecObligatoryComponent,
+    SecStatisticComponent,
+    SecAdminComponent
   ],
   imports: [
     BrowserModule,
