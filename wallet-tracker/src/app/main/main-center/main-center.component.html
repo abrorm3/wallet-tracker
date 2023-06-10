@@ -6,6 +6,14 @@
       </li>
     </ul>
   </div>
+    <div *ngIf="!selectedSection" class="">
+      <ul>
+        <li class="transaction" *ngFor="let transaction of transactions; let i=index" (click)="onEditTransaction()">
+          {{transaction.title}}
+        </li>
+      </ul>
+    </div>
+
     <div *ngIf="selectedSection === 'Categories'" class="">
       <app-sec-categories></app-sec-categories></div>
     <div *ngIf="selectedSection === 'Subscriptions'" class="">
@@ -16,6 +24,9 @@
       <app-sec-statistic></app-sec-statistic></div>
     <div *ngIf="selectedSection === 'Admin'" class="">
       <app-sec-admin></app-sec-admin></div>
-  <div id="search"></div>
+
+  <div id="search">
+    <input type="text" placeholder="Search" #filter>
+  </div>
   <div id="transactions"></div>
 </div>
