@@ -1,4 +1,8 @@
-
+*,
+*::before,
+*::after {
+  box-sizing:content-box;
+}
 #auth{
   width: 100vw;
   display:block;
@@ -33,7 +37,7 @@ h2{
   height: 55px;
 }
 input{
-  width: 329.01px;
+  width: 349.1px;
   height: 55px;
   font-family: 'Space-Grotesk';
   font-size: 18px;
