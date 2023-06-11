@@ -28,6 +28,7 @@ export class MainCenterService {
       '27.02.2023',
       210.0
     ),
+
     new Transaction(
       'Salary for June',
       this.categoryTypes[3],

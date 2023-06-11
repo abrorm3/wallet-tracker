@@ -15,6 +15,7 @@ import { SecSubscriptionsComponent } from './main/main-center/sec-subscriptions/
 import { SecObligatoryComponent } from './main/main-center/sec-obligatory/sec-obligatory.component';
 import { SecStatisticComponent } from './main/main-center/sec-statistic/sec-statistic.component';
 import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.component';
+import { DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.compon
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
