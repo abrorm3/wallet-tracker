@@ -10,7 +10,13 @@
     <img src="assets/icons/search.png" alt="searchIcon">
     <input type="text" placeholder="Search" #filter>
   </div>
-    <div *ngIf="!selectedSection">
+  <div [ngSwitch]="selected">
+    <div *ngSwitchCase="'Categories'"><app-sec-categories></app-sec-categories></div>
+    <div *ngSwitchCase="'Subscriptions'"><app-sec-subscriptions></app-sec-subscriptions></div>
+    <div *ngSwitchCase="'Obligatory'"><app-sec-obligatory></app-sec-obligatory></div>
+    <div *ngSwitchCase="'Statistic'"><app-sec-statistic></app-sec-statistic></div>
+    <div *ngSwitchCase="'Admin'"><app-sec-admin></app-sec-admin></div>
+    <div *ngSwitchDefault>
       <ul>
         <li class="transactions" *ngFor="let transaction of transactions; let i=index" (click)="onEditTransaction()">
           <div class="trBox">
@@ -32,17 +38,5 @@
         </li>
       </ul>
     </div>
-
-    <div *ngIf="selectedSection === 'Categories'" class="">
-      <app-sec-categories></app-sec-categories></div>
-    <div *ngIf="selectedSection === 'Subscriptions'" class="">
-      <app-sec-subscriptions></app-sec-subscriptions></div>
-    <div *ngIf="selectedSection === 'Obligatory'" class="">
-      <app-sec-obligatory></app-sec-obligatory></div>
-    <div *ngIf="selectedSection === 'Statistic'" class="">
-      <app-sec-statistic></app-sec-statistic></div>
-    <div *ngIf="selectedSection === 'Admin'" class="">
-      <app-sec-admin></app-sec-admin></div>
-
-  <div id="transactions"></div>
+  </div>
 </div>

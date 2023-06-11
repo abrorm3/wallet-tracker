@@ -9,8 +9,10 @@ import { Subject } from 'rxjs';
 export class MainCenterService {
   categoryTypes: string[] = ['Home', 'Rent', 'Shopping', 'Salary','Dept','Fun','Music'];
   selectedCatType:string = '';
+  selectedSection= new Subject<string | null>();
 
   transactionsChanged = new Subject<Transaction[]>();
+
   private transactions: Transaction[] = [
     new Transaction(
       'Flat rent for March',
