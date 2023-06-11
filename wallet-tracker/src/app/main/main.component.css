@@ -1,6 +1,7 @@
 h1{
   font-size: 20px;
   padding-left: 8px;
+  cursor: pointer;
 }
 #main{
   padding:50px 44px 0 44px;

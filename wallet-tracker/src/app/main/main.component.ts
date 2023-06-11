@@ -13,6 +13,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    
+
+  }
+  siteName(){
+    window.location.reload();
   }
 }

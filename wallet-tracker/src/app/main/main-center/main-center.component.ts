@@ -15,11 +15,12 @@ export class MainCenterComponent implements OnInit, OnDestroy {
   selectedSection: string | null = null;
 
   constructor(private mainCenterService:MainCenterService){}
-  
+
   selectSection(section: string): void {
     this.selectedSection = section;
   }
   onEditTransaction(){
+    console.log('Editing');
 
   }
   ngOnInit(): void {
