@@ -13,7 +13,6 @@ export class CardsComponent implements OnInit {
   cards: Card[];
 constructor(private cardsService:CardsService){}
 
-  // cards = CARDS;
   selectedCard?: Card;
 
   onSelect(card:Card){
