@@ -7,6 +7,8 @@ h1{
   display: flex;
   flex-direction: row;
   justify-content:space-evenly;
+  background-color: #ECEDED;
+  height: 100vh;
 }
 #main > div {
   flex: 1;

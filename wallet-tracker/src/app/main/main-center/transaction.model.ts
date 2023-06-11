@@ -1,15 +1,15 @@
 export class Transaction{
   public title: string;
-  public categoryComp: any;
+  public categoryType: string;
   public description: string;
   public income: boolean;
-  public date: Date;
+  public date: string;
   public amount: number;
 
 
-  constructor(title:string, category:any, desc:string, income:boolean, date:Date, amount:number){
+  constructor(title:string, category:string, desc:string, income:boolean, date:string, amount:number){
     this.title = title;
-    this.categoryComp = category;
+    this.categoryType = category;
     this.description = desc;
     this.income = income;
     this.date = date;

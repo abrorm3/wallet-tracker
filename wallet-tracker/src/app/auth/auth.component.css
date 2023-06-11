@@ -27,14 +27,14 @@
   border-radius: 10px;
 }
 .email-form{
-  /* padding-top:37.35px; */
+  padding-top:37.35px;
   padding-bottom: 30.44px;
+  height: 55px;
 }
 h2{
-  font-family:'Alata-Regular';
+  font-family: Alata-Regular;
   font-size: 40px;
   line-height: 55.2px;
-  height: 55px;
 }
 input{
   width: 349.1px;
@@ -48,6 +48,7 @@ input{
 }
 .password-form{
   position: relative;
+  height: 55px;
 }
 .password-form img{
   position: absolute;

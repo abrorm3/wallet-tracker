@@ -8,4 +8,6 @@ import { Transaction } from '../transaction.model';
 })
 export class SecCategoriesComponent {
   @Input() transaction: Transaction;
+  
+
 }

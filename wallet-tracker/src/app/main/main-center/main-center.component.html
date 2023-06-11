@@ -6,10 +6,29 @@
       </li>
     </ul>
   </div>
-    <div *ngIf="!selectedSection" class="">
+  <div id="search">
+    <img src="assets/icons/search.png" alt="searchIcon">
+    <input type="text" placeholder="Search" #filter>
+  </div>
+    <div *ngIf="!selectedSection">
       <ul>
-        <li class="transaction" *ngFor="let transaction of transactions; let i=index" (click)="onEditTransaction()">
-          {{transaction.title}} {{transaction.description}}
+        <li class="transactions" *ngFor="let transaction of transactions; let i=index" (click)="onEditTransaction()">
+          <div class="trBox">
+            <!-- 'tr' is shortcut for transaction -->
+            <div class="trCategory">
+              <p>{{ transaction.categoryType}}</p>
+            </div>
+            <div class="trRest">
+              <p class="trTitle">{{transaction.title}}</p>
+              <div class="boxBottom">
+                <img [src]="transaction.income?'assets/icons/income.png':'assets/icons/expense.png'" alt="money flow icon" style="max-height: 30px;">
+                <p class="moneyFlow">{{transaction.income?'Income':'Expense'}}</p>
+                <p class="dot">·</p>
+                <p>{{transaction.date}}</p>
+              </div>
+              <p class="trAmount">{{transaction.amount}}$</p>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -25,8 +44,5 @@
     <div *ngIf="selectedSection === 'Admin'" class="">
       <app-sec-admin></app-sec-admin></div>
 
-  <div id="search">
-    <input type="text" placeholder="Search" #filter>
-  </div>
   <div id="transactions"></div>
 </div>

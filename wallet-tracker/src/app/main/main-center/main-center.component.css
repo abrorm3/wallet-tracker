@@ -1,4 +1,6 @@
-
+#sections{
+  margin-bottom: 50px;
+}
 #sections ul{
   display: flex;
   flex-direction: row;
@@ -9,4 +11,76 @@
 }
 #sections li a{
   color:#373737;
+}
+#search{
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#search input{
+  width: 617px;
+  height: 55px;
+  border-radius: 10px;
+  border: 0px solid #fff;
+  padding-left: 50px;
+  font-size: 18px;
+
+}
+#search img{
+  position: absolute;
+  left: 18px;
+}
+.trCategory{
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  width: 157px;
+  height: 65px;
+  background-color: #ECEDED;
+  margin: 0 18px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 26%;
+  font-family: Space-Grotesk;
+}
+.trBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 617px;
+  height: 91px;
+  margin-bottom: 27.5px;
+}
+.boxBottom{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.trTitle{
+  font-size: 20px;
+  font-weight: 400;
+}
+.trRest{
+  position: relative;
+  flex-grow: 1;
+  font-family: Space-Grotesk;
+}
+.trRest:not(.trTitle){
+  font-size: 15px;
+}
+.trAmount{
+  position: absolute;
+  top:0;
+  right: 14px;
+}
+.moneyFlow{
+  margin-left: 5px;
+}
+.dot{
+  padding: 0 7px;
 }
