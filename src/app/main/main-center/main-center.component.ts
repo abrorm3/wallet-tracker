@@ -16,6 +16,7 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     'Statistic',
     'Admin',
   ];
+
   transactions: Transaction[] = [];
   private subscription: Subscription[] = [];
   selected: string | null = null;
@@ -28,13 +29,17 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     console.log('Editing');
   }
   ngOnInit(): void {
-    this.transactions = this.mainCenterService.getTransactions();
-    const trChanged = this.mainCenterService.transactionsChanged.subscribe(
-      (transactions: Transaction[]) => {
-        this.transactions = transactions;
-      }
-    );
-    this.subscription.push(trChanged);
+    this.getTransactions();
+    const t = new Transaction(
+          'Flat rent for March',
+          "Home",
+          'Payment for Charvak dacha',
+          false,
+          new Date(2023,2,10),
+          650.0
+        )
+    // this.mainCenterService.addTransaction(t).subscribe();
+
 
     const selectedSection = this.mainCenterService.selectedSection.subscribe(
       (section: string | null) => {
@@ -43,12 +48,23 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     );
     this.subscription.push(selectedSection);
   }
+  getTransactions(){
+    this.mainCenterService.getTransactions().subscribe({
+      next: (res) =>{
+        this.transactions = Object.values(res);
+        console.log(this.transactions);
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+  //Search filter
+  // filteredTransactionList: HousingLocation[] = [];
   ngOnDestroy(): void {
     for (const subscription of this.subscription) {
       subscription.unsubscribe();
     }
-    // this.subscription[0].unsubscribe();
   }
-  //Search filter
-  // filteredTransactionList: HousingLocation[] = [];
 }
