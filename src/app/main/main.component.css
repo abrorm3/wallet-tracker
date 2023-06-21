@@ -15,3 +15,30 @@ h1{
   flex: 1;
   margin: 0 36px; /*Adjust margin as needed*/
 }
+/* sidebar */
+.example-container {
+  width: 100vw;
+
+  height: 100vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+  position:absolute;
+
+}
+
+/* Edit */
+.tr-edit{
+  position: absolute;
+  right: 0;
+  top:0;
+}

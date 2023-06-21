@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>Edit Transaction</h3>
+  <div class="toggle">
+    <div class="expense-option">
+      <img src="assets/icons/expense.png" alt="expense icon" style="width: 35px;">
+      <button [class.active]="selectedOption === 'option1'" (click)="toggleOption('option1')">Expenses</button>
+    </div>
+    <div class="income-option">
+      <img src="assets/icons/income.png" alt="income icon" style="width: 35px;">
+      <button [class.active]="selectedOption === 'option2'" (click)="toggleOption('option2')">Income</button>
+    </div>
+  </div>
+  <form>
+    <div class="title tr-edit">
+      <fieldset class="title">
+        <legend>Title <span></span></legend>
+        <input type="text">
+      </fieldset>
+      <fieldset class="categories">
+        <select class="chosen-select" [(ngModel)]="selectedOption">
+          <option *ngFor="let option of options" [value]="option.value" [selected]="option.value === selectedOption" [disabled]="option.disabled">{{ option.label }}</option>
+        </select>
+
+      </fieldset>
+    </div>
+  </form>
+
+</div>

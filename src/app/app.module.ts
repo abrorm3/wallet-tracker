@@ -15,6 +15,9 @@ import { SecSubscriptionsComponent } from './main/main-center/sec-subscriptions/
 import { SecObligatoryComponent } from './main/main-center/sec-obligatory/sec-obligatory.component';
 import { SecStatisticComponent } from './main/main-center/sec-statistic/sec-statistic.component';
 import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TrEditComponent } from './sidebar/tr-edit/tr-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.compon
     SecSubscriptionsComponent,
     SecObligatoryComponent,
     SecStatisticComponent,
-    SecAdminComponent
+    SecAdminComponent,
+    TrEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.compon
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

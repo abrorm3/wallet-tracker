@@ -1,0 +1,20 @@
+.container{
+  width: 39vw;
+  height: 100vh;
+  background-color: #fff;
+}
+.toggle {
+  display: flex;
+}
+
+.toggle button {
+  background-color: #ddd;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle button.active {
+  background-color: #aaa;
+  color: white;
+}

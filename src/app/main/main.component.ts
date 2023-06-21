@@ -12,6 +12,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   }
   cards: Card[];
+  showFiller = false;
 
   ngOnInit(): void {
 
