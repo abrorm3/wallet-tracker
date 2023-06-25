@@ -17,8 +17,12 @@
         <input type="text">
       </fieldset>
       <fieldset class="categories">
-        
-
+        <select class="minimal">
+          <option disabled selected>Select categories</option>
+          <option *ngFor="let category of categoryList">
+            {{category.name}}
+          </option>
+        </select>
       </fieldset>
     </div>
   </form>

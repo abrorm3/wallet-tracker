@@ -3,10 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { LoadingSpinnerComponent } from './shared/loading-spinner.component';
 import { MainComponent } from './main/main.component';
 import { CardsComponent } from './main/cards/cards.component';
 import { MainCenterComponent } from './main/main-center/main-center.component';
@@ -18,12 +16,11 @@ import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.compon
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TrEditComponent } from './sidebar/tr-edit/tr-edit.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
     MainComponent,
     CardsComponent,
     MainCenterComponent,
@@ -42,6 +39,7 @@ import { TrEditComponent } from './sidebar/tr-edit/tr-edit.component';
     FormsModule,
     MatSidenavModule,
     BrowserAnimationsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

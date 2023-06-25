@@ -49,4 +49,7 @@ export class MainCenterService {
   getTransactions(){
     return this.http.get<Transaction[]>(url+'/transactions.json')
   }
+  getCategories(){
+    return this.http.get<any>(url+'categoeries.json')
+  }
 }

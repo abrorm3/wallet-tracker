@@ -6,7 +6,7 @@ import { MainCenterService } from './main-center.service';
 @Component({
   selector: 'app-main-center',
   templateUrl: './main-center.component.html',
-  styleUrls: ['./main-center.component.css'],
+  styleUrls: ['./main-center.component.css']
 })
 export class MainCenterComponent implements OnInit, OnDestroy {
   sections = [

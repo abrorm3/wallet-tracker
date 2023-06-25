@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
 
+class Category {
+  constructor(public name: string) { }
+}
 @Component({
   selector: 'app-tr-edit',
   templateUrl: './tr-edit.component.html',
@@ -9,7 +12,10 @@ import { Component } from '@angular/core';
 export class TrEditComponent {
 
   selectedOption: string;
-
+  categoryList: Category[]=[
+    new Category("Something"),
+    new Category("ANotherCat")
+  ]
 
   ngOnInit() {
     // Retrieve the previously selected option from local storage
