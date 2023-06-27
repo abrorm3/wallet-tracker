@@ -12,11 +12,13 @@
   </div>
   <form>
     <div class="title tr-edit">
+      <form #editForm="ngForm"></form>
       <fieldset class="title">
         <legend>Title <span></span></legend>
         <input type="text">
       </fieldset>
       <fieldset class="categories">
+        <legend>Categories</legend>
         <select class="minimal">
           <option disabled selected>Select categories</option>
           <option *ngFor="let category of categoryList">
@@ -24,6 +26,19 @@
           </option>
         </select>
       </fieldset>
+      <fieldset class="amount">
+        <legend>Amount</legend>
+        <input type="number">
+      </fieldset>
+      <fieldset class="payDate" >
+        <legend>Payment Date</legend>
+        <input type="date" name="date" [valueAsDate]="transaction[0].date">
+      </fieldset>
+      <fieldset class="description">
+        <legend>Description</legend>
+        <input type="text">
+      </fieldset>
+
     </div>
   </form>
 
