@@ -15,7 +15,7 @@ import { SecStatisticComponent } from './main/main-center/sec-statistic/sec-stat
 import { SecAdminComponent } from './main/main-center/sec-admin/sec-admin.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TrEditComponent } from './sidebar/tr-edit/tr-edit.component';
+import { TrEditComponent } from './main/sidebar/tr-edit/tr-edit.component';
 import { AuthModule } from './auth/auth.module';
 
 @NgModule({
