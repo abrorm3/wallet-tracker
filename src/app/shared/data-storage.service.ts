@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { url } from "./app.const";
-import { Category } from "./main/main-center/category.model";
+import { BASE_URL } from "../app.const";
+import { Category } from "../main/main-center/category.model";
 
 @Injectable({providedIn:'root'})
 
@@ -10,10 +10,10 @@ export class DataStorageService {
 
   }
   getCategories(){
-    return this.http.get<Category>(url+'/categories.json')
+    return this.http.get<Category>(BASE_URL+'/categories.json')
   }
   addCategory(category:Category){
-    return this.http.post<any>(url+'/categories.json', category)
+    return this.http.post<any>(BASE_URL+'/categories.json', category)
 
   }
 }

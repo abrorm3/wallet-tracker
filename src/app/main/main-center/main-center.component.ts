@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Transaction } from './transaction.model';
 import { Subscription } from 'rxjs';
 import { MainCenterService } from './main-center.service';
+import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
 
 @Component({
   selector: 'app-main-center',
@@ -17,19 +18,19 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     'Admin',
   ];
 
-  transactions: Transaction[] = [];
+  readonly transactions$ = this.transactionsApiService.getAllTransaction();
   private subscription: Subscription[] = [];
   selected: string | null = null;
 
-  constructor(private mainCenterService: MainCenterService) {}
+  constructor(private mainCenterService: MainCenterService, private transactionsApiService: TransactionsApiService) {}
   selectSection(section: string): void {
     this.mainCenterService.selectedSection.next(section);
   }
-  onEditTransaction() {
-    console.log('Editing');
+  onEditTransaction(transactionId:string) {
+
+    console.log(transactionId);
   }
   ngOnInit(): void {
-    this.getTransactions();
     const t = new Transaction(
           'Flat rent for March',
           "Home",
@@ -38,7 +39,7 @@ export class MainCenterComponent implements OnInit, OnDestroy {
           new Date(2023,2,10),
           650.0
         )
-    // this.mainCenterService.addTransaction(t).subscribe();
+    this.mainCenterService.addTransaction(t).subscribe();
 
 
     const selectedSection = this.mainCenterService.selectedSection.subscribe(
@@ -48,18 +49,7 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     );
     this.subscription.push(selectedSection);
   }
-  getTransactions(){
-    this.mainCenterService.getTransactions().subscribe({
-      next: (res) =>{
-        this.transactions = Object.values(res);
-        console.log(this.transactions);
 
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
   //Search filter
   // filteredTransactionList: HousingLocation[] = [];
   ngOnDestroy(): void {

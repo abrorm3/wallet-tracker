@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataStorageService } from 'src/app/data-storage.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Category } from 'src/app/main/main-center/category.model';
 import { Transaction } from 'src/app/main/main-center/transaction.model';
 
@@ -22,7 +22,7 @@ export class TrEditComponent {
         new Date(2011,0o5,10),
         1.00
       )];
-      
+
   ngOnInit() {
     // Retrieve the previously selected option from local storage
     this.selectedOption = localStorage.getItem('selectedOption');
