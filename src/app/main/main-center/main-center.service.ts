@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Transaction } from './transaction.model';
 import { SecCategoriesComponent } from './sec-categories/sec-categories.component';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BASE_URL } from 'src/app/app.const';
 
 @Injectable({
@@ -43,7 +43,11 @@ export class MainCenterService {
   //   ),
   ];
   addTransaction(transaction:Transaction){
-    return this.http.post<any>(BASE_URL+'/transactions.json', transaction)
+    return this.http.post<any>(BASE_URL+'/transactions.json', transaction,{
+      headers: new HttpHeaders({
+        
+      })
+    })
 
   }
   getTransactions(){

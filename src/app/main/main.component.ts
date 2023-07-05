@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Card } from './cards/card.model';
 import { MainCenterService } from './main-center/main-center.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +9,7 @@ import { MainCenterService } from './main-center/main-center.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit, OnDestroy {
-  constructor(private mainCenterService: MainCenterService) {
+  constructor(private mainCenterService: MainCenterService, private authService: AuthService) {
 
   }
   cards: Card[];
@@ -19,6 +20,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
 
+  }
+  logOut(){
+    this.authService.logout();
   }
   siteName(){
     this.mainCenterService.selectedSection.next(null);

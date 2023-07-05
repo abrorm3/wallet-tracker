@@ -12,6 +12,7 @@ export class AuthComponent {
   constructor(private authService: AuthService, private router: Router){}
 
   private subscription: Subscription | undefined;
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -33,6 +34,7 @@ export class AuthComponent {
     this.changetype=!this.changetype;
   }
   onSubmit(form:NgForm){
+
     if(!form.valid){
       return;
     }

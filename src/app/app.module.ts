@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { CardsComponent } from './main/cards/cards.component';
 import { MainCenterComponent } from './main/main-center/main-center.component';
@@ -17,6 +17,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TrEditComponent } from './main/sidebar/tr-edit/tr-edit.component';
 import { AuthModule } from './auth/auth.module';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { AuthModule } from './auth/auth.module';
     BrowserAnimationsModule,
     AuthModule
   ],
-  providers: [],
+  providers:[
+    [{provide:HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
