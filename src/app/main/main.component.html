@@ -8,11 +8,12 @@
   </div>
 
   <div class="right-bar">
-    <h1>
+    <div>
+      <h6>{{userEmail}}</h6>
       <button (click)="logOut()">Logout</button>
-    </h1>
+    </div>
   </div>
 </div>
 <div class="tr-edit">
-  <app-tr-edit></app-tr-edit>
+  <router-outlet></router-outlet>
 </div>

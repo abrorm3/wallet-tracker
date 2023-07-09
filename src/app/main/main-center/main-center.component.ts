@@ -3,11 +3,13 @@ import { Transaction } from './transaction.model';
 import { Subscription } from 'rxjs';
 import { MainCenterService } from './main-center.service';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-center',
   templateUrl: './main-center.component.html',
-  styleUrls: ['./main-center.component.css']
+  styleUrls: ['./main-center.component.css'],
 })
 export class MainCenterComponent implements OnInit, OnDestroy {
   sections = [
@@ -21,26 +23,33 @@ export class MainCenterComponent implements OnInit, OnDestroy {
   readonly transactions$ = this.transactionsApiService.getAllTransaction();
   private subscription: Subscription[] = [];
   selected: string | null = null;
+  constructor(
+    private mainCenterService: MainCenterService,
+    private transactionsApiService: TransactionsApiService,
+    private router:Router
 
-  constructor(private mainCenterService: MainCenterService, private transactionsApiService: TransactionsApiService) {}
+  ) {}
   selectSection(section: string): void {
     this.mainCenterService.selectedSection.next(section);
   }
-  onEditTransaction(transactionId:string) {
+  onEditTransaction(transactionId: string) {
 
+    // console.log(this.transactionsApiService.getTransaction(transactionId));
+    this.transactionsApiService.getTransaction(transactionId);
+    this.router.navigate(['/main', transactionId, 'edit']);
     console.log(transactionId);
   }
   ngOnInit(): void {
+    // this.transactionsApiService.getAllTransaction();
     const t = new Transaction(
-          'Flat rent for March',
-          "Home",
-          'Payment for Charvak dacha',
-          false,
-          new Date(2023,2,10),
-          650.0
-        )
-    this.mainCenterService.addTransaction(t).subscribe();
-
+      'Flat rent for March',
+      'Home',
+      'Payment for Charvak dacha',
+      false,
+      new Date(2023, 2, 10),
+      650.0
+    );
+    // this.mainCenterService.addTransaction(t).subscribe();
 
     const selectedSection = this.mainCenterService.selectedSection.subscribe(
       (section: string | null) => {

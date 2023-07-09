@@ -45,12 +45,15 @@ export class MainCenterService {
   addTransaction(transaction:Transaction){
     return this.http.post<any>(BASE_URL+'/transactions.json', transaction,{
       headers: new HttpHeaders({
-        
+
       })
     })
 
   }
   getTransactions(){
     return this.http.get<Transaction[]>(BASE_URL+'/transactions.json')
+  }
+  getTransaction(index:number){
+    return this.transactions[index];
   }
 }

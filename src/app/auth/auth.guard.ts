@@ -10,7 +10,7 @@ export const canActivate: CanActivateFn = (
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return authService.user$.pipe(
+  return authService.user.pipe(
     map(user =>{
       if(user){
         return true;
@@ -24,7 +24,6 @@ export const canActivate: CanActivateFn = (
       return of(false);
     })
   );
-  // return authService.user === null?false:true;
 };
 
 export const canActivateChild: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => canActivate(route, state);

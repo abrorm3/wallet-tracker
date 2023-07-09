@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <h3>Edit Transaction</h3>
   <div class="toggle">
     <div class="expense-option">
@@ -10,36 +10,34 @@
       <button [class.active]="selectedOption === 'option2'" (click)="toggleOption('option2')">Income</button>
     </div>
   </div>
-  <form>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
     <div class="title tr-edit">
-      <form #editForm="ngForm"></form>
       <fieldset class="title">
         <legend>Title <span></span></legend>
-        <input type="text">
+        <input type="text" formControlName="title" id="title">
       </fieldset>
       <fieldset class="categories">
         <legend>Categories</legend>
-        <select class="minimal">
+        <select class="minimal" formControlName="category" id="category">
           <option disabled selected>Select categories</option>
-          <option *ngFor="let category of categoryList">
+          <option *ngFor="let category of categoryList" [value]="category.name">
             {{category.name}}
           </option>
         </select>
       </fieldset>
       <fieldset class="amount">
         <legend>Amount</legend>
-        <input type="number">
+        <input type="number" formControlName="amount" id="amount">
       </fieldset>
-      <fieldset class="payDate" >
+      <fieldset class="payDate">
         <legend>Payment Date</legend>
-        <input type="date" name="date" [valueAsDate]="transaction[0].date">
+        <input type="date" formControlName="date" id="date">
       </fieldset>
       <fieldset class="description">
         <legend>Description</legend>
-        <input type="text">
+        <input type="text" formControlName="description" id="description">
       </fieldset>
-
     </div>
+    <button type="submit">Submit</button>
   </form>
-
-</div> -->
+</div>
