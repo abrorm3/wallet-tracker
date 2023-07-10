@@ -20,7 +20,13 @@ export class TrEditComponent {
   selectedOption: string;
   id: number;
   editMode = false;
-  transactionForm: FormGroup;
+  transactionForm: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    categoryType: new FormControl('', Validators.required),
+    amount: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+  });
 
   categoryList: Category[] = [];
   transaction: Transaction[] = [
@@ -33,27 +39,46 @@ export class TrEditComponent {
       1.0
     ),
   ];
-
+  some = null;
+  private formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
+  }
   ngOnInit() {
-    // Retrieve the previously selected option from local storage
     this.selectedOption = localStorage.getItem('selectedOption');
     this.getCategories();
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
-      this.initForm();
     });
 
-    this.transactionsApiService.getTransactionData().subscribe((data)=>{
-      console.log(data);
+    this.transactionsApiService.getTransactionData().subscribe((data) => {
+      if (data) {
+        const date = new Date(data['date']);
+        this.transactionForm.patchValue({
+          amount: data['amount'],
+          title: data['title'],
+          categoryType: data['categoryType'],
+          description: data['description'],
+          date: this.formatDate(data['date']),
+        });
+        console.log(data);
+      }
+    });
 
-    })
     // const s = new Category(
     //   ''
     // )
     // this.dataStorageService.addCategory(s).subscribe();
   }
-  onSubmit() {}
+  onSubmit() {
+    console.log(this.editMode);
+  }
   getCategories() {
     this.dataStorageService.getCategories().subscribe({
       next: (res) => {
@@ -64,21 +89,6 @@ export class TrEditComponent {
         console.log(err);
       },
     });
-  }
-  private initForm() {
-    let transactionTitle = '';
-    let transactionCategory = '';
-    let transactionAmount = '';
-    let transactionDate = '';
-    let transactionDescription = '';
-
-    this.transactionForm = new FormGroup({
-      title: new FormControl(transactionTitle, Validators.required),
-      category: new FormControl(transactionCategory, Validators.required),
-      amount: new FormControl(transactionAmount, Validators.required),
-      date: new FormControl(transactionDate, Validators.required),
-      description: new FormControl(transactionDescription, Validators.required)
-    })
   }
 
   toggleOption(option: string) {

@@ -18,7 +18,7 @@
       </fieldset>
       <fieldset class="categories">
         <legend>Categories</legend>
-        <select class="minimal" formControlName="category" id="category">
+        <select class="minimal" formControlName="categoryType" id="category">
           <option disabled selected>Select categories</option>
           <option *ngFor="let category of categoryList" [value]="category.name">
             {{category.name}}
@@ -38,6 +38,6 @@
         <input type="text" formControlName="description" id="description">
       </fieldset>
     </div>
-    <button type="submit">Submit</button>
+    <button type="submit" (click)="onSubmit()">Submit</button>
   </form>
 </div>
