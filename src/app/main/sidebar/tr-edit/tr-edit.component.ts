@@ -20,7 +20,10 @@ export class TrEditComponent {
   selectedOption: string;
   id: number;
   editMode = false;
+  incomeOrExpenseBool = false;
+
   transactionForm: FormGroup = new FormGroup({
+    income: new FormControl('',Validators.required),
     title: new FormControl('', Validators.required),
     categoryType: new FormControl('', Validators.required),
     amount: new FormControl('', Validators.required),
@@ -61,6 +64,7 @@ export class TrEditComponent {
       if (data) {
         const date = new Date(data['date']);
         this.transactionForm.patchValue({
+          income: data['income'],
           amount: data['amount'],
           title: data['title'],
           categoryType: data['categoryType'],
@@ -90,7 +94,15 @@ export class TrEditComponent {
       },
     });
   }
+  incomeOrExpense(data:string){
+    if(data==='income'){
+      this.incomeOrExpenseBool = true;
+    }else{
+      this.incomeOrExpenseBool = false;
+    }
+    console.log(this.incomeOrExpenseBool);
 
+  }
   toggleOption(option: string) {
     this.selectedOption = option;
     // Store the selected option in local storage

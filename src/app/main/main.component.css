@@ -10,6 +10,7 @@ h1{
   justify-content:space-evenly;
   background-color: #ECEDED;
   height: 100vh;
+  overflow: hidden;
 }
 #main > div {
   flex: 1;

@@ -10,7 +10,7 @@
     <img src="assets/icons/search.png" alt="searchIcon">
     <input type="text" placeholder="Search" #filter>
   </div>
-  <div [ngSwitch]="selected">
+  <div id="data" [ngSwitch]="selected">
     <div *ngSwitchCase="'Categories'"><app-sec-categories></app-sec-categories></div>
     <div *ngSwitchCase="'Subscriptions'"><app-sec-subscriptions></app-sec-subscriptions></div>
     <div *ngSwitchCase="'Obligatory'"><app-sec-obligatory></app-sec-obligatory></div>
