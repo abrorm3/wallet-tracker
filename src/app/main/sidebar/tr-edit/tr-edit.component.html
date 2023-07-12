@@ -4,38 +4,41 @@
   </div>
   <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
     <div class="title tr-edit">
-      <div class="expense-option" (click)="incomeOrExpense('expense')">
-        <img src="assets/icons/expense.png" alt="expense icon" style="width: 35px;">
-        <a [class.active]="selectedOption === 'option1'" (click)="toggleOption('option1')">Expenses</a>
-      </div>
-      <div class="income-option" (click)="incomeOrExpense('income')">
-        <img src="assets/icons/income.png" alt="income icon" style="width: 35px;">
-        <a [class.active]="selectedOption === 'option2'" (click)="toggleOption('option2')">Income</a>
+      <div class="incomeOrExpenseContainer">
+        <div class="expense-option incomeOrExpense" [class.active]="selectedOption === 'option1'" (click)="incomeOrExpense('expense');toggleOption('option1')">
+          <img src="assets/icons/expense.png" alt="expense icon" style="width: 35px;">
+          <a>Expenses</a>
+        </div>
+        <div class="income-option incomeOrExpense" [class.active]="selectedOption === 'option2'" (click)="incomeOrExpense('income');toggleOption('option2')">
+          <img src="assets/icons/income.png" alt="income icon" style="width: 35px;">
+          <a>Income</a>
+        </div>
       </div>
       <fieldset class="title">
         <legend>Title <span></span></legend>
-        <input type="text" formControlName="title" id="title">
+        <input type="text" formControlName="title" id="title" required placeholder="Transaction title">
       </fieldset>
       <fieldset class="categories">
         <legend>Categories</legend>
-        <select class="minimal" formControlName="categoryType" id="category">
+        <select formControlName="categoryType" id="category" required>
           <option disabled selected>Select categories</option>
           <option *ngFor="let category of categoryList" [value]="category.name">
             {{category.name}}
           </option>
         </select>
+
       </fieldset>
       <fieldset class="amount">
         <legend>Amount</legend>
-        <input type="number" formControlName="amount" id="amount">
+        <input type="number" formControlName="amount" id="amount" required placeholder="Transaction amount">
       </fieldset>
       <fieldset class="payDate">
         <legend>Payment Date</legend>
-        <input type="date" formControlName="date" id="date">
+        <input type="date" formControlName="date" id="date" required>
       </fieldset>
       <fieldset class="description">
         <legend>Description</legend>
-        <input type="text" formControlName="description" id="description">
+        <input type="text" formControlName="description" id="description" required placeholder="Describtion">
       </fieldset>
     </div>
     <button type="submit" (click)="onSubmit()">Submit</button>

@@ -6,6 +6,7 @@ import { TransactionsApiService } from 'src/app/shared/transactions-api.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
+
 @Component({
   selector: 'app-tr-edit',
   templateUrl: './tr-edit.component.html',
@@ -17,6 +18,7 @@ export class TrEditComponent {
     private transactionsApiService: TransactionsApiService,
     private route: ActivatedRoute
   ) {}
+
   selectedOption: string;
   id: number;
   editMode = false;
@@ -107,5 +109,7 @@ export class TrEditComponent {
     this.selectedOption = option;
     // Store the selected option in local storage
     localStorage.setItem('selectedOption', this.selectedOption);
+
   }
+
 }

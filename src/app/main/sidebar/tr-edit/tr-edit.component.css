@@ -2,50 +2,54 @@
   width: 39vw;
   height: 100vh;
   background-color: #fff;
-  margin-top: 39.25px;
-  margin-left: 34.44px;
+  padding-top: 39.25px;
+  padding-left: 34.44px;
 }
 .sectionName{
   font-size: 32px;
 
 }
-
-
-select.minimal {
-  background-image:
-    linear-gradient(45deg, transparent 50%, gray 50%),
-    linear-gradient(135deg, gray 50%, transparent 50%),
-    linear-gradient(to right, #ccc, #ccc);
-  background-position:
-    calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px),
-    calc(100% - 2.5em) 0.5em;
-  background-size:
-    5px 5px,
-    5px 5px,
-    1px 1.5em;
-  background-repeat: no-repeat;
+.incomeOrExpenseContainer{
+  margin: 32px 0;
+}
+.incomeOrExpense, .incomeOrExpenseContainer{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  /* margin-right: 5px; */
 }
 
-select.minimal:focus {
-  background-image:
-    linear-gradient(45deg, green 50%, transparent 50%),
-    linear-gradient(135deg, transparent 50%, green 50%),
-    linear-gradient(to right, #ccc, #ccc);
-  background-position:
-    calc(100% - 15px) 1em,
-    calc(100% - 20px) 1em,
-    calc(100% - 2.5em) 0.5em;
-  background-size:
-    5px 5px,
-    5px 5px,
-    1px 1.5em;
-  background-repeat: no-repeat;
-  border-color: green;
-  outline: 0;
+.incomeOrExpense a{
+  font-size: 20px;
+  width: 120px;
+  /* height: 35px; */
 }
-
-select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
+.incomeOrExpense img{
+  margin-right: 7px;
+}
+.active{
+  outline:2px solid #373737 ;
+  outline-offset: -1px;
+  border-radius: 7px;
+}
+legend:after {
+  content:" *";
+  color: red;
+}
+legend{
+  font-size:12px;
+  color:#373737;
+  opacity: 50%;
+}
+fieldset{
+  padding-left: 13px;
+  margin-bottom: 19px;
+}
+input, select{
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  font-size: 16px;
+  color:#000;
 }
