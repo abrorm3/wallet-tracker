@@ -41,20 +41,18 @@
         <input type="text" formControlName="description" id="description" required placeholder="Description">
       </fieldset>
       <div id="imageUpload">
-        <div class="img">
-          <img src="assets/icons/image-placeholder.png" alt="imagePlaceholder">
-          <p>img.jpeg</p>
-        </div>
-        <div class="img" *ngIf=selectedFile>
+        <div class="img" *ngFor="let imageUrl of imageUrls; let i = index">
           <img [src]="imageUrl" alt="imagePlaceholder" width="82px" height="72px">
-          <p class="imageName">{{selectedFile.name}}</p>
+          <p class="imageName">{{ selectedFiles[i].name }}</p>
+          <button (click)="removeImage(i)">Remove</button>
         </div>
-        <!-- <div class="img" *ngFor="let img of image"></div> -->
-        <div class="add_image" (click)="addImage();fileInput.click()">
-          <input type="file" #fileInput style="display: none;" (change)="onFileSelected(fileInput)">
+        <div class="add_image" (click)="fileInput.click()">
+          <input type="file" #fileInput style="display: none;" multiple (change)="onFileSelected(fileInput)">
           <p>+</p>
         </div>
       </div>
+
+
 
     </div>
     <button type="submit">Submit</button>

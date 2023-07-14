@@ -8,7 +8,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 
-
 @Component({
   selector: 'app-tr-edit',
   templateUrl: './tr-edit.component.html',
@@ -26,12 +25,11 @@ export class TrEditComponent {
   id: number;
   editMode = false;
   incomeOrExpenseBool = false;
-  selectedFile: any = null;
-  imageUrl:string | null = null;
-  imgURLs: string[] = [];
+  selectedFiles: File[] = [];
+  imageUrls: string[] = [];
 
   transactionForm: FormGroup = new FormGroup({
-    income: new FormControl('',Validators.required),
+    income: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
     categoryType: new FormControl('', Validators.required),
     amount: new FormControl('', Validators.required),
@@ -89,21 +87,24 @@ export class TrEditComponent {
     // this.dataStorageService.addCategory(s).subscribe();
   }
   onSubmit(values) {
-    if(this.transactionForm.valid){
+    if (this.transactionForm.valid && this.selectedFiles.length > 0) {
       console.log(values);
-      const filePath = `docs/${this.selectedFile.name}_${new Date().getTime()}`
-      const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath,this.selectedFile).snapshotChanges().pipe(
-        finalize(()=>{
-          fileRef.getDownloadURL().subscribe((url)=>{
-            console.log(url);
-
-          })
-        })
-      ).subscribe()
+      this.selectedFiles.forEach((file) => {
+        const filePath = `docs/${file.name}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage
+          .upload(filePath, file)
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe((url) => {
+                console.log(url);
+              });
+            })
+          )
+          .subscribe();
+      });
     }
-
-    console.log(this.editMode);
   }
   getCategories() {
     this.dataStorageService.getCategories().subscribe({
@@ -116,29 +117,35 @@ export class TrEditComponent {
       },
     });
   }
-  incomeOrExpense(data:string){
-    if(data==='income'){
+  incomeOrExpense(data: string) {
+    if (data === 'income') {
       this.incomeOrExpenseBool = true;
-    }else{
+    } else {
       this.incomeOrExpenseBool = false;
     }
     console.log(this.incomeOrExpenseBool);
-
   }
   toggleOption(option: string) {
     this.selectedOption = option;
     // Store the selected option in local storage
     localStorage.setItem('selectedOption', this.selectedOption);
-
   }
-  addImage(){
-
-  }
+  addImage() {}
   onFileSelected(fileInput: HTMLInputElement) {
-    const file: File = (fileInput.files as FileList)[0];
-    this.selectedFile = file;
-    this.imageUrl = URL.createObjectURL(file);
-    // Do something with the selected file
-    console.log(this.selectedFile);
+    const files: FileList = fileInput.files;
+    this.selectedFiles = [];
+    this.imageUrls = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file: File = files[i];
+      this.selectedFiles.push(file);
+      const imageUrl = URL.createObjectURL(file);
+      this.imageUrls.push(imageUrl);
+    }
+  }
+
+  removeImage(index: number) {
+    this.selectedFiles.splice(index, 1);
+    this.imageUrls.splice(index, 1);
   }
 }
