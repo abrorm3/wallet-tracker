@@ -2,7 +2,7 @@
   <h2 class="sectionName">Edit Transaction</h2>
   <div class="toggle">
   </div>
-  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit(transactionForm.value)">
     <div class="title tr-edit">
       <div class="incomeOrExpenseContainer">
         <div class="expense-option incomeOrExpense" [class.active]="selectedOption === 'option1'" (click)="incomeOrExpense('expense');toggleOption('option1')">
@@ -38,15 +38,25 @@
       </fieldset>
       <fieldset class="description">
         <legend>Description</legend>
-        <input type="text" formControlName="description" id="description" required placeholder="Describtion">
+        <input type="text" formControlName="description" id="description" required placeholder="Description">
       </fieldset>
-      <div class="imageUpload">
+      <div id="imageUpload">
         <div class="img">
-          <img src="src/assets/icons/image-placeholder.png" alt="imagePlaceholder">
+          <img src="assets/icons/image-placeholder.png" alt="imagePlaceholder">
+          <p>img.jpeg</p>
+        </div>
+        <div class="img" *ngIf=selectedFile>
+          <img [src]="imageUrl" alt="imagePlaceholder" width="82px" height="72px">
+          <p class="imageName">{{selectedFile.name}}</p>
+        </div>
+        <!-- <div class="img" *ngFor="let img of image"></div> -->
+        <div class="add_image" (click)="addImage();fileInput.click()">
+          <input type="file" #fileInput style="display: none;" (change)="onFileSelected(fileInput)">
+          <p>+</p>
         </div>
       </div>
 
     </div>
-    <button type="submit" (click)="onSubmit()">Submit</button>
+    <button type="submit">Submit</button>
   </form>
 </div>

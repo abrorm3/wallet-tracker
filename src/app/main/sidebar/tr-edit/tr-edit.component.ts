@@ -5,6 +5,8 @@ import { Transaction } from 'src/app/main/main-center/transaction.model';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 
 
 @Component({
@@ -16,13 +18,17 @@ export class TrEditComponent {
   constructor(
     private dataStorageService: DataStorageService,
     private transactionsApiService: TransactionsApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storage: AngularFireStorage
   ) {}
 
   selectedOption: string;
   id: number;
   editMode = false;
   incomeOrExpenseBool = false;
+  selectedFile: any = null;
+  imageUrl:string | null = null;
+  imgURLs: string[] = [];
 
   transactionForm: FormGroup = new FormGroup({
     income: new FormControl('',Validators.required),
@@ -82,7 +88,21 @@ export class TrEditComponent {
     // )
     // this.dataStorageService.addCategory(s).subscribe();
   }
-  onSubmit() {
+  onSubmit(values) {
+    if(this.transactionForm.valid){
+      console.log(values);
+      const filePath = `docs/${this.selectedFile.name}_${new Date().getTime()}`
+      const fileRef = this.storage.ref(filePath);
+      this.storage.upload(filePath,this.selectedFile).snapshotChanges().pipe(
+        finalize(()=>{
+          fileRef.getDownloadURL().subscribe((url)=>{
+            console.log(url);
+
+          })
+        })
+      ).subscribe()
+    }
+
     console.log(this.editMode);
   }
   getCategories() {
@@ -111,5 +131,14 @@ export class TrEditComponent {
     localStorage.setItem('selectedOption', this.selectedOption);
 
   }
+  addImage(){
 
+  }
+  onFileSelected(fileInput: HTMLInputElement) {
+    const file: File = (fileInput.files as FileList)[0];
+    this.selectedFile = file;
+    this.imageUrl = URL.createObjectURL(file);
+    // Do something with the selected file
+    console.log(this.selectedFile);
+  }
 }
