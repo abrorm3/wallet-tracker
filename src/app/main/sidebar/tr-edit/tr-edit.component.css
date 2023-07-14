@@ -2,8 +2,7 @@
   width: 39vw;
   height: 100vh;
   background-color: #fff;
-  padding-top: 39.25px;
-  padding-left: 34.44px;
+  padding: 39px 34px 0 34px;
 }
 .sectionName{
   font-size: 32px;
@@ -44,6 +43,7 @@ legend{
 fieldset{
   padding-left: 13px;
   margin-bottom: 19px;
+  /* margin-right: 13px; */
 }
 input, select{
   width: 100%;
