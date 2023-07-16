@@ -1,60 +1,126 @@
 <div class="container">
   <h2 class="sectionName">Edit Transaction</h2>
-  <div class="toggle">
-  </div>
-  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit(transactionForm.value)">
+  <div class="toggle"></div>
+  <form
+    [formGroup]="transactionForm"
+    (ngSubmit)="onSubmit(transactionForm.value)"
+  >
     <div class="title tr-edit">
       <div class="incomeOrExpenseContainer">
-        <div class="expense-option incomeOrExpense" [class.active]="selectedOption === 'option1'" (click)="incomeOrExpense('expense');toggleOption('option1')">
-          <img src="assets/icons/expense.png" alt="expense icon" style="width: 35px;">
+        <div
+          class="expense-option incomeOrExpense"
+          [class.active]="selectedOption === 'option1'"
+          (click)="incomeOrExpense('expense'); toggleOption('option1')"
+        >
+          <img
+            src="assets/icons/expense.png"
+            alt="expense icon"
+            style="width: 35px"
+          />
           <a>Expenses</a>
         </div>
-        <div class="income-option incomeOrExpense" [class.active]="selectedOption === 'option2'" (click)="incomeOrExpense('income');toggleOption('option2')">
-          <img src="assets/icons/income.png" alt="income icon" style="width: 35px;">
+        <div
+          class="income-option incomeOrExpense"
+          [class.active]="selectedOption === 'option2'"
+          (click)="incomeOrExpense('income'); toggleOption('option2')"
+        >
+          <img
+            src="assets/icons/income.png"
+            alt="income icon"
+            style="width: 35px"
+          />
           <a>Income</a>
         </div>
       </div>
       <fieldset class="title">
         <legend>Title <span></span></legend>
-        <input type="text" formControlName="title" id="title" required placeholder="Transaction title">
+        <input
+          type="text"
+          formControlName="title"
+          id="title"
+          required
+          placeholder="Transaction title"
+        />
       </fieldset>
       <fieldset class="categories">
         <legend>Categories</legend>
         <select formControlName="categoryType" id="category" required>
           <option disabled selected>Select categories</option>
           <option *ngFor="let category of categoryList" [value]="category.name">
-            {{category.name}}
+            {{ category.name }}
           </option>
         </select>
-
       </fieldset>
       <fieldset class="amount">
         <legend>Amount</legend>
-        <input type="number" formControlName="amount" id="amount" required placeholder="Transaction amount">
+        <input
+          type="number"
+          formControlName="amount"
+          id="amount"
+          required
+          placeholder="Transaction amount"
+        />
       </fieldset>
       <fieldset class="payDate">
         <legend>Payment Date</legend>
-        <input type="date" formControlName="date" id="date" required>
+        <input type="date" formControlName="date" id="date" required />
       </fieldset>
       <fieldset class="description">
         <legend>Description</legend>
-        <input type="text" formControlName="description" id="description" required placeholder="Description">
+        <input
+          type="text"
+          formControlName="description"
+          id="description"
+          required
+          placeholder="Description"
+        />
       </fieldset>
       <div id="imageUpload">
-        <div class="img" *ngFor="let imageUrl of imageUrls; let i = index">
-          <img [src]="imageUrl" alt="imagePlaceholder" width="82px" height="72px">
-          <p class="imageName">{{ selectedFiles[i].name }}</p>
-          <button (click)="removeImage(i)">Remove</button>
+        <div class="img" *ngIf="selectedFiles.length === 0">
+          <img
+            src="assets/icons/image-placeholder.png"
+            alt="imagePlaceholder"
+          />
+          <p>img.jpeg</p>
         </div>
-        <div class="add_image" (click)="fileInput.click()">
-          <input type="file" #fileInput style="display: none;" multiple (change)="onFileSelected(fileInput)">
+        <div class="img" *ngFor="let imageUrl of imageUrls; let i = index">
+          <img
+            [src]="imageUrl"
+            alt="imagePlaceholder"
+            width="82px"
+            height="72px"
+          />
+          <p class="imageName">{{ selectedFiles[i].name }}</p>
+          <button (click)="removeImage(i)" class="btnRemove">Remove</button>
+        </div>
+        <div
+          class="add_image"
+          [class.disabled]="selectedFiles.length >= maxImages"
+          (click)="fileInput.click()"
+        >
+          <input
+            type="file"
+            #fileInput
+            style="display: none"
+            multiple
+            (change)="onFileSelected(fileInput)"
+            [disabled]="selectedFiles.length >= maxImages"
+          />
           <p>+</p>
         </div>
       </div>
-
-
-
     </div>
-    <button type="submit">Submit</button>
+    <div class="finalBtns">
+      <button type="reset" class="cancel btn" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="submit btn"
+        [disabled]="!transactionForm.valid"
+      >
+        Save
+      </button>
+    </div>
   </form>
 </div>

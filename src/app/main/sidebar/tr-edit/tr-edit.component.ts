@@ -4,7 +4,7 @@ import { Category } from 'src/app/main/main-center/category.model';
 import { Transaction } from 'src/app/main/main-center/transaction.model';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 
@@ -18,6 +18,7 @@ export class TrEditComponent {
     private dataStorageService: DataStorageService,
     private transactionsApiService: TransactionsApiService,
     private route: ActivatedRoute,
+    private router: Router,
     private storage: AngularFireStorage
   ) {}
 
@@ -27,6 +28,7 @@ export class TrEditComponent {
   incomeOrExpenseBool = false;
   selectedFiles: File[] = [];
   imageUrls: string[] = [];
+  maxImages = 4;
 
   transactionForm: FormGroup = new FormGroup({
     income: new FormControl('', Validators.required),
@@ -87,7 +89,7 @@ export class TrEditComponent {
     // this.dataStorageService.addCategory(s).subscribe();
   }
   onSubmit(values) {
-    if (this.transactionForm.valid && this.selectedFiles.length > 0) {
+    if (this.transactionForm.valid) {
       console.log(values);
       this.selectedFiles.forEach((file) => {
         const filePath = `docs/${file.name}_${new Date().getTime()}`;
@@ -133,9 +135,13 @@ export class TrEditComponent {
   addImage() {}
   onFileSelected(fileInput: HTMLInputElement) {
     const files: FileList = fileInput.files;
-    this.selectedFiles = [];
-    this.imageUrls = [];
-
+    // this.selectedFiles = [];
+    // this.imageUrls = [];
+    if (this.selectedFiles.length + files.length > this.maxImages) {
+      // Display an error message or prevent further selection
+      console.log(`Maximum ${this.maxImages} images can be selected.`);
+      return;
+    }
     for (let i = 0; i < files.length; i++) {
       const file: File = files[i];
       this.selectedFiles.push(file);
@@ -147,5 +153,8 @@ export class TrEditComponent {
   removeImage(index: number) {
     this.selectedFiles.splice(index, 1);
     this.imageUrls.splice(index, 1);
+  }
+  onCancel() {
+    this.router.navigate(['main']);
   }
 }

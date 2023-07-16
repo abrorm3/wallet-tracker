@@ -1,72 +1,80 @@
-.container{
+.container {
   width: 39vw;
-  height: 100vh;
   background-color: #fff;
   padding: 39px 34px 0 34px;
+  position: relative;
+  min-height: 100vh;
 }
-.sectionName{
+.sectionName {
   font-size: 32px;
-
 }
-.incomeOrExpenseContainer{
+.incomeOrExpenseContainer {
   margin: 32px 0;
 }
-.incomeOrExpense, .incomeOrExpenseContainer{
+.incomeOrExpense,
+.incomeOrExpenseContainer {
   display: flex;
   align-items: center;
   padding: 4px;
   /* margin-right: 5px; */
 }
+.incomeOrExpense {
+  cursor: pointer;
+}
 
-.incomeOrExpense a{
+.incomeOrExpense a {
   font-size: 20px;
   width: 120px;
   /* height: 35px; */
 }
-.incomeOrExpense img{
+.incomeOrExpense img {
   margin-right: 7px;
 }
-.active{
-  outline:2px solid #373737 ;
+.active {
+  outline: 2px solid #373737;
   outline-offset: -1px;
   border-radius: 7px;
 }
 legend:after {
-  content:" *";
+  content: " *";
   color: red;
 }
-legend{
-  font-size:12px;
-  color:#373737;
+legend {
+  font-size: 12px;
+  color: #373737;
   opacity: 50%;
 }
-fieldset{
+fieldset {
   padding-left: 13px;
   margin-bottom: 19px;
   /* margin-right: 13px; */
 }
-input, select{
+input,
+select {
   width: 100%;
   border: none;
   outline: none;
   padding: 12px 0;
   font-size: 16px;
-  color:#000;
+  color: #000;
 }
-#imageUpload{
+#imageUpload {
   display: flex;
 }
-.img img{
+.img {
+  margin-right: 10px;
+}
+.img img {
   display: flex;
-  align-items:flex-start;
+  align-items: flex-start;
   flex-direction: column;
-  margin-right: 23px;
   border-radius: 10px;
+  margin: 0 auto;
 }
-.img p{
+.img p {
   padding-left: 5px;
 }
-.add_image{
+.add_image {
   width: 90px;
   height: 71px;
   display: flex;
@@ -78,9 +86,46 @@ input, select{
   font-size: 32px;
   cursor: pointer;
 }
+.add_image.disabled {
+  cursor: not-allowed;
+}
 .imageName {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   max-width: 85px; /* Adjust the value as per your requirements */
+}
+.finalBtns {
+  position: fixed;
+  bottom: 5px;
+  right: 34px;
+}
+.btn {
+  height: 49px;
+  width: 97px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.submit {
+  background-color: #b9e2e6;
+}
+.submit:hover {
+  background-color: #d6f4f7;
+}
+.cancel {
+  background-color: rgba(0, 0, 0, 0);
+}
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btnRemove {
+  font-size: 12px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
+  padding: 0px 2px;
 }
