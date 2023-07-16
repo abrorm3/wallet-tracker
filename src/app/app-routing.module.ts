@@ -4,13 +4,15 @@ import { MainComponent } from './main/main.component';
 import { AuthComponent } from './auth/auth.component';
 import { canActivate } from './auth/auth.guard';
 import { TrEditComponent } from './main/sidebar/tr-edit/tr-edit.component';
+import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
   { path: 'main', component: MainComponent, canActivate: [canActivate]},
   {path:'main/:id', component:MainComponent,children:[
-    {path: 'edit',component:TrEditComponent}
+    {path: 'edit',component:TrEditComponent},
+    {path: 'details',component:TrDetailsComponent}
   ] },
   { path: 'auth', component: AuthComponent },
 ];

@@ -22,6 +22,7 @@ import { TrEditComponent } from './main/sidebar/tr-edit/tr-edit.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { environment } from '../environments/environment';
+import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { environment } from '../environments/environment';
     SecStatisticComponent,
     SecAdminComponent,
     TrEditComponent,
+    TrDetailsComponent,
   ],
   imports: [
     BrowserModule,

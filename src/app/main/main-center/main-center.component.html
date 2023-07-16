@@ -18,7 +18,7 @@
     <div *ngSwitchCase="'Admin'"><app-sec-admin></app-sec-admin></div>
     <div *ngSwitchDefault>
       <ul>
-        <li [routerLink]="['/edit']" class="transactions" *ngFor="let transaction of transactions$ | async; let i=index" (click)="onEditTransaction(transaction.id)">
+        <li [routerLink]="['/edit']" class="transactions" *ngFor="let transaction of transactions$ | async; let i=index" (click)="onDetailsTransaction(transaction.id)">
           <div class="trBox" >
             <!-- 'tr' is shortcut for transaction -->
             <div class="trCategory">

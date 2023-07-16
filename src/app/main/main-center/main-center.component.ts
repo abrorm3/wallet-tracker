@@ -32,13 +32,7 @@ export class MainCenterComponent implements OnInit, OnDestroy {
   selectSection(section: string): void {
     this.mainCenterService.selectedSection.next(section);
   }
-  onEditTransaction(transactionId: string) {
 
-    // console.log(this.transactionsApiService.getTransaction(transactionId));
-    this.transactionsApiService.getTransaction(transactionId);
-    this.router.navigate(['/main', transactionId, 'edit']);
-    console.log(transactionId);
-  }
   ngOnInit(): void {
     // this.transactionsApiService.getAllTransaction();
     const t = new Transaction(
@@ -58,7 +52,16 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     );
     this.subscription.push(selectedSection);
   }
-
+  onEditTransaction(transactionId: string) {
+    this.transactionsApiService.getTransaction(transactionId);
+    this.router.navigate(['/main', transactionId, 'edit']);
+    console.log(transactionId);
+  }
+  onDetailsTransaction(transactionId: string) {
+    this.transactionsApiService.getTransaction(transactionId);
+    this.router.navigate(['/main', transactionId, 'details']);
+    console.log(transactionId);
+  }
   //Search filter
   // filteredTransactionList: HousingLocation[] = [];
   ngOnDestroy(): void {
