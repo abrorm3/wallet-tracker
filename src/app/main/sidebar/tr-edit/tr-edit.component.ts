@@ -155,6 +155,9 @@ export class TrEditComponent {
     this.imageUrls.splice(index, 1);
   }
   onCancel() {
+    this.transactionForm.reset();
+    this.selectedFiles = [];
+    this.imageUrls = [];
     this.router.navigate(['main']);
   }
 }

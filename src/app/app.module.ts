@@ -43,7 +43,6 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     FormsModule,
     MatSidenavModule,
-    BrowserAnimationsModule,
     AuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
