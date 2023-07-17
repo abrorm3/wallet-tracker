@@ -1,0 +1,48 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as desired */
+  z-index: 4; /* Ensure the overlay is above other elements */
+}
+
+.container {
+  width: 39vw;
+  background-color: #fff;
+  padding: 39px 34px 0 34px;
+  position: relative;
+  min-height: 100vh;
+  z-index: 5;
+}
+.sectionName {
+  font-size: 32px;
+  font-weight: 400;
+}
+.cancel {
+  background-color: rgba(0, 0, 0, 0);
+}
+.finalBtns {
+  position: fixed;
+  bottom: 5px;
+  right: 34px;
+}
+.btn {
+  height: 49px;
+  width: 97px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.operations img{
+  width: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}

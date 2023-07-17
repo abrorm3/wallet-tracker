@@ -1,7 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_URL } from '../app.const';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, catchError, map } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  ReplaySubject,
+  Subject,
+  catchError,
+  map,
+} from 'rxjs';
 import { objectToArray } from './utils/objectArray';
 import { FirebaseResponse } from './interfaces/firebase.interface';
 import {
@@ -18,7 +25,9 @@ export class TransactionsApiService {
     private httpClient: HttpClient,
     private authService: AuthService
   ) {}
-  private transactionDataSubject: BehaviorSubject<FirebaseTransaction> = new BehaviorSubject<FirebaseTransaction>(null);
+  private transactionDataSubject: BehaviorSubject<FirebaseTransaction> =
+    new BehaviorSubject<FirebaseTransaction>(null);
+    transactionIdForAll:string = null;
 
   getAllTransaction(): Observable<Transaction[]> {
     return this.httpClient
@@ -32,9 +41,15 @@ export class TransactionsApiService {
       );
   }
   getTransaction(transactionId: string): void {
+    this.transactionIdForAll = transactionId;
     this.httpClient
       .get<FirebaseResponse<FirebaseTransaction>>(
-        BASE_URL + '/transactions/' + this.authService.user.value.id+'/' + transactionId + '.json'
+        BASE_URL +
+          '/transactions/' +
+          this.authService.user.value.id +
+          '/' +
+          transactionId +
+          '.json'
       )
       .pipe(
         catchError((error) => {
@@ -46,7 +61,20 @@ export class TransactionsApiService {
         this.transactionDataSubject.next(data);
       });
   }
-  getTransactionData(){
+  getTransactionData() {
     return this.transactionDataSubject.asObservable();
+  }
+  deleteTransaction() {
+    const deleteUrl = BASE_URL + '/transactions/' + this.authService.user.value.id + '/' + this.transactionIdForAll + '.json';
+    console.log(deleteUrl);
+
+    return this.httpClient.delete<FirebaseResponse<FirebaseTransaction>>(deleteUrl)
+      .pipe(
+        catchError((error) => {
+          // Handle error if any
+          console.error('Error while deleting transaction:', error);
+          return error;
+        })
+      );
   }
 }

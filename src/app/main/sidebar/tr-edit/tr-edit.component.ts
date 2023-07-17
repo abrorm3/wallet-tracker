@@ -120,11 +120,7 @@ export class TrEditComponent {
     });
   }
   incomeOrExpense(data: string) {
-    if (data === 'income') {
-      this.incomeOrExpenseBool = true;
-    } else {
-      this.incomeOrExpenseBool = false;
-    }
+    this.incomeOrExpenseBool = (data === 'income');
     console.log(this.incomeOrExpenseBool);
   }
   toggleOption(option: string) {

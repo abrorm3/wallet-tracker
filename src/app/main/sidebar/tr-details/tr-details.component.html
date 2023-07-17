@@ -1,1 +1,17 @@
-<p>tr-details works!</p>
+<div class="container">
+  <div class="header">
+    <h2 class="sectionName">Transaction Information</h2>
+    <div class="operations">
+      <img src="assets/icons/edit-icon.png" alt="edit icon" (click)="editTransaction()">
+      <img src="assets/icons/delete-icon.png" alt="delete icon" (click)="deleteTransaction()">
+      <img src="assets/icons/close-icon.png" alt="close icon" (click)="onCancel()">
+    </div>
+  </div>
+
+  <div class="finalBtns">
+    <button type="reset" class="cancel btn" (click)="onCancel()">
+      Close
+    </button>
+  </div>
+</div>
+<div class="modal-overlay"(click)="onCancel()"></div>
