@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-tr-details',
   templateUrl: './tr-details.component.html',
   styleUrls: ['./tr-details.component.css'],
 })
-export class TrDetailsComponent implements OnInit {
+export class TrDetailsComponent implements OnInit, OnDestroy {
+
   constructor(
     private router: Router,
-    private transactionsApiService: TransactionsApiService
+    private transactionsApiService: TransactionsApiService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     this.transactionsApiService.getTransactionData().subscribe((data) => {
-      if (data) {
-        console.log(data.amount + 'this is from detailsss');
-      }
-    });
+      console.log(data);
+
+    })
+
+
   }
+
   editTransaction() {
     const currentUrl = this.router.url;
     const editUrl = currentUrl.replace('/details', '/edit');
@@ -51,6 +57,9 @@ export class TrDetailsComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['main']);
+    this.location.back();
+  }
+  ngOnDestroy(): void {
+
   }
 }

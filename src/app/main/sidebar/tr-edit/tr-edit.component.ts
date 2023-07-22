@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-tr-edit',
@@ -19,7 +20,8 @@ export class TrEditComponent {
     private transactionsApiService: TransactionsApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private location: Location
   ) {}
 
   selectedOption: string;
@@ -154,6 +156,7 @@ export class TrEditComponent {
     this.transactionForm.reset();
     this.selectedFiles = [];
     this.imageUrls = [];
-    this.router.navigate(['main']);
+    // this.router.navigate(['main']);
+    this.location.back();
   }
 }
