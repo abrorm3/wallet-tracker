@@ -53,13 +53,11 @@ export class MainCenterComponent implements OnInit, OnDestroy {
     this.subscription.push(selectedSection);
   }
   onEditTransaction(transactionId: string) {
-    this.transactionsApiService.getTransaction(transactionId);
-    this.router.navigate(['/main', transactionId, 'edit']);
+    this.transactionsApiService.getTransaction(transactionId, 'edit');
     console.log(transactionId);
   }
   onDetailsTransaction(transactionId: string) {
-    this.transactionsApiService.getTransaction(transactionId);
-    this.router.navigate(['/main', transactionId, 'details']);
+    this.transactionsApiService.getTransaction(transactionId, 'details');
     console.log(transactionId);
   }
   //Search filter

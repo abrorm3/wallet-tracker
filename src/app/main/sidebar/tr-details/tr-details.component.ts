@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
 import {Location} from '@angular/common';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -18,9 +19,9 @@ export class TrDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.transactionsApiService.getTransactionData().subscribe((data) => {
+    this.transactionsApiService.getTransactionData().pipe(take(1))
+    .subscribe((data) => {
       console.log(data);
-
     })
 
 

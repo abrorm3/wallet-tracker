@@ -8,6 +8,7 @@ import {
   Subject,
   catchError,
   map,
+  tap,
 } from 'rxjs';
 import { objectToArray } from './utils/objectArray';
 import { FirebaseResponse } from './interfaces/firebase.interface';
@@ -16,6 +17,7 @@ import {
   Transaction,
 } from './interfaces/transaction.interface';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +25,8 @@ import { AuthService } from '../auth/auth.service';
 export class TransactionsApiService {
   constructor(
     private httpClient: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private router:Router
   ) {}
   private transactionDataSubject: BehaviorSubject<FirebaseTransaction> =
     new BehaviorSubject<FirebaseTransaction>(null);
@@ -40,7 +43,7 @@ export class TransactionsApiService {
         )
       );
   }
-  getTransaction(transactionId: string): void {
+  getTransaction(transactionId: string, navigationPath: string): void {
     this.transactionIdForAll = transactionId;
     this.httpClient
       .get<FirebaseResponse<FirebaseTransaction>>(
@@ -59,6 +62,7 @@ export class TransactionsApiService {
       )
       .subscribe((data) => {
         this.transactionDataSubject.next(data);
+        this.router.navigate(['/main', transactionId, navigationPath]);
       });
   }
   getTransactionData() {
