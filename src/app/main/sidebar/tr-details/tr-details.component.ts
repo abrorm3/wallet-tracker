@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
 import {Location} from '@angular/common';
 import { take } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -11,20 +14,30 @@ import { take } from 'rxjs';
   styleUrls: ['./tr-details.component.css'],
 })
 export class TrDetailsComponent implements OnInit, OnDestroy {
+  transactionData:any;
+  cardCurrency = '$';
+  id: string;
+
 
   constructor(
     private router: Router,
     private transactionsApiService: TransactionsApiService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private storage: AngularFireStorage,
+    private http: HttpClient,
   ) {}
+
 
   ngOnInit(): void {
     this.transactionsApiService.getTransactionData().pipe(take(1))
     .subscribe((data) => {
       console.log(data);
+      this.transactionData = data;
     })
-
-
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id);
   }
 
   editTransaction() {
@@ -56,10 +69,40 @@ export class TrDetailsComponent implements OnInit, OnDestroy {
       }
   });
   }
+  downloadImg(){
+    const folderPath = this.authService.user.value.email+"/"+this.transactionsApiService.getTransactionId();
+    const storageRef = this.storage.refFromURL('gs://wallet-tracker-57bf6.appspot.com/' + folderPath);
+    storageRef.listAll().subscribe((result) => {
+      result.items.forEach((item) => {
+        item.getDownloadURL().then((url) => {
+          // Download the image using Angular HttpClient
+          this.downloadImage(url, item.name);
+        });
+      });
+    });
+  }
+  private downloadImage(url: string, filename: string) {
+    // Use Angular HttpClient to download the image
+    this.http.get(url, { responseType: 'blob' }).subscribe((data) => {
+      // Create a temporary anchor element to trigger the download
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(data);
+      a.download = filename;
+
+      // Append the anchor to the body and trigger the click event to start the download
+      document.body.appendChild(a);
+      a.click();
+
+      // Clean up
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
+  }
 
   onCancel() {
     this.location.back();
   }
+
   ngOnDestroy(): void {
 
   }

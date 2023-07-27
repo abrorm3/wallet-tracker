@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 import {Location} from '@angular/common';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-tr-edit',
@@ -21,9 +22,11 @@ export class TrEditComponent {
     private route: ActivatedRoute,
     private router: Router,
     private storage: AngularFireStorage,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) {}
 
+  readonly transactions$ = this.transactionsApiService.getAllTransaction();
   selectedOption: string;
   id: number;
   editMode = false;
@@ -31,6 +34,8 @@ export class TrEditComponent {
   selectedFiles: File[] = [];
   imageUrls: string[] = [];
   maxImages = 4;
+  maxSelections = 3;
+  maxSelectionsReached = false;
 
   transactionForm: FormGroup = new FormGroup({
     income: new FormControl('', Validators.required),
@@ -93,20 +98,36 @@ export class TrEditComponent {
   onSubmit(values) {
     if (this.transactionForm.valid) {
       console.log(values);
-      this.selectedFiles.forEach((file) => {
-        const filePath = `docs/${file.name}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(filePath);
-        this.storage
-          .upload(filePath, file)
-          .snapshotChanges()
-          .pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe((url) => {
-                console.log(url);
-              });
-            })
-          )
-          .subscribe();
+      console.log(this.transactions$);
+
+      // Get the user's authentication token from the AuthService
+      this.authService.user.subscribe((user) => {
+        if (user) {
+          const userEmail = user.email;
+
+          // Loop through the selected files and upload each one
+          this.selectedFiles.forEach((file) => {
+            const transactionId = this.transactionsApiService.getTransactionId();
+            const filePath = `${userEmail}/${transactionId}/${new Date().getTime()}_${file.name}`;
+            console.log(filePath);
+
+            const fileRef = this.storage.ref(filePath);
+            const task = this.storage.upload(filePath, file);
+
+            // Set the authentication token in the request headers
+            task.snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  fileRef.getDownloadURL().subscribe((url) => {
+                    console.log(url);
+                  });
+                })
+              )
+              .subscribe();
+          });
+        } else {
+          console.error('User not authenticated.');
+        }
       });
     }
   }
@@ -130,7 +151,6 @@ export class TrEditComponent {
     // Store the selected option in local storage
     localStorage.setItem('selectedOption', this.selectedOption);
   }
-  addImage() {}
   onFileSelected(fileInput: HTMLInputElement) {
     const files: FileList = fileInput.files;
     // this.selectedFiles = [];
@@ -159,4 +179,17 @@ export class TrEditComponent {
     // this.router.navigate(['main']);
     this.location.back();
   }
+  limitSelection(event: any) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedOptions = Array.from(selectElement.selectedOptions);
+
+    if (selectedOptions.length > this.maxSelections) {
+      // If the user selects more than the allowed limit, unselect the last selected option
+      selectedOptions.forEach((option) => {
+        option.selected = false;
+        this.maxSelectionsReached = true;
+      });
+    }
+  }
+
 }

@@ -58,6 +58,7 @@ export class MainCenterComponent implements OnInit, OnDestroy {
   }
   onDetailsTransaction(transactionId: string) {
     this.transactionsApiService.getTransaction(transactionId, 'details');
+    this.transactionsApiService.setTransactionId(transactionId);
     console.log(transactionId);
   }
   //Search filter

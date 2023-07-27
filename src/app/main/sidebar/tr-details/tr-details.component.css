@@ -40,9 +40,75 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 33px;
 }
+.title{
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 26px;
+}
+.categories {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 25px 0;
+}
+.categories p {
+  padding: 19px 50px;
+  font-size: 20px;
+  font-weight: 700;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  margin: 10px 30px 10px 0;
+}
+
 .operations img{
   width: 25px;
   margin-right: 10px;
   cursor: pointer;
+}
+.details-flex{
+  display: flex;
+  align-items: center;
+  line-height: 25px;
+  margin:16px 0;
+}
+.details-flex h3{
+  font-size: 20px;
+  font-weight: 700;
+  width: 141px;
+}
+.details-flex p{
+  font-size: 20px;
+  font-weight: 400;
+  width: 312px;
+  margin-left: 40px;
+}
+.line{
+  width: 100%;
+  height: 0.5px;
+  background-color: #000;
+}
+.incomeOrExpenseContainer{
+  display: flex;
+  justify-content: space-between;
+}
+.incomeOrExpense{
+  display: flex;
+  align-items: center;
+}
+.incomeOrExpense p{
+  font-size: 20px;
+  margin-left: 6px;
+}
+.incomeOrExpenseContainer .amount{
+  font-size: 36px;
+  font-weight: 400;
+}
+.expenseColor{
+  color: #EE3F19;
+}
+.incomeColor{
+  color:#21C206;
 }

@@ -140,3 +140,6 @@ button[disabled] {
   border-radius: 10px;
   padding: 0px 2px;
 }
+.optionLimit{
+  color:red;
+}

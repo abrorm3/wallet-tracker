@@ -23,14 +23,17 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class TransactionsApiService {
+
+  private transactionDataSubject: BehaviorSubject<FirebaseTransaction> =
+    new BehaviorSubject<FirebaseTransaction>(null);
+  transactionIdForAll: string = null;
+  private transactionId: string;
+
   constructor(
     private httpClient: HttpClient,
     private authService: AuthService,
-    private router:Router
+    private router: Router
   ) {}
-  private transactionDataSubject: BehaviorSubject<FirebaseTransaction> =
-    new BehaviorSubject<FirebaseTransaction>(null);
-    transactionIdForAll:string = null;
 
   getAllTransaction(): Observable<Transaction[]> {
     return this.httpClient
@@ -68,11 +71,25 @@ export class TransactionsApiService {
   getTransactionData() {
     return this.transactionDataSubject.asObservable();
   }
+  setTransactionId(id: string) {
+    this.transactionId = id;
+  }
+
+  getTransactionId() {
+    return this.transactionId;
+  }
   deleteTransaction() {
-    const deleteUrl = BASE_URL + '/transactions/' + this.authService.user.value.id + '/' + this.transactionIdForAll + '.json';
+    const deleteUrl =
+      BASE_URL +
+      '/transactions/' +
+      this.authService.user.value.id +
+      '/' +
+      this.transactionIdForAll +
+      '.json';
     console.log(deleteUrl);
 
-    return this.httpClient.delete<FirebaseResponse<FirebaseTransaction>>(deleteUrl)
+    return this.httpClient
+      .delete<FirebaseResponse<FirebaseTransaction>>(deleteUrl)
       .pipe(
         catchError((error) => {
           // Handle error if any

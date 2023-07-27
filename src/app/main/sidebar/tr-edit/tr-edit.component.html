@@ -43,8 +43,8 @@
         />
       </fieldset>
       <fieldset class="categories">
-        <legend>Categories</legend>
-        <select formControlName="categoryType" id="category" required>
+        <legend>Categories <span class="optionLimit" *ngIf="maxSelectionsReached">option limit is {{maxSelections}}</span></legend>
+        <select (change)="limitSelection($event)" formControlName="categoryType" id="category" required multiple required size="2">
           <option disabled selected>Select categories</option>
           <option *ngFor="let category of categoryList" [value]="category.name">
             {{ category.name }}
