@@ -17,7 +17,8 @@ export class TrDetailsComponent implements OnInit, OnDestroy {
   transactionData:any;
   cardCurrency = '$';
   id: string;
-
+  attachmentsAvailable = true;
+attachments: { url: string, filename: string }[] = [];
 
   constructor(
     private router: Router,
@@ -38,6 +39,7 @@ export class TrDetailsComponent implements OnInit, OnDestroy {
     })
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
+    this.downloadImg();
   }
 
   editTransaction() {
@@ -69,16 +71,23 @@ export class TrDetailsComponent implements OnInit, OnDestroy {
       }
   });
   }
-  downloadImg(){
-    const folderPath = this.authService.user.value.email+"/"+this.transactionsApiService.getTransactionId();
+  downloadImg() {
+    const folderPath = this.authService.user.value.email + "/" + this.transactionsApiService.getTransactionId();
     const storageRef = this.storage.refFromURL('gs://wallet-tracker-57bf6.appspot.com/' + folderPath);
+
     storageRef.listAll().subscribe((result) => {
-      result.items.forEach((item) => {
-        item.getDownloadURL().then((url) => {
-          // Download the image using Angular HttpClient
-          this.downloadImage(url, item.name);
+      // Check if there are any attachments
+      this.attachmentsAvailable = result.items.length > 0;
+
+      if (this.attachmentsAvailable) {
+        this.attachments = []; // Clear the existing attachments array
+        result.items.forEach((item) => {
+          item.getDownloadURL().then((url) => {
+            // Store the attachment URL and filename in the attachments array
+            this.attachments.push({ url: url, filename: item.name });
+          });
         });
-      });
+      }
     });
   }
   private downloadImage(url: string, filename: string) {
@@ -98,6 +107,15 @@ export class TrDetailsComponent implements OnInit, OnDestroy {
       URL.revokeObjectURL(a.href);
     });
   }
+  downloadAttachments() {
+    if (this.attachmentsAvailable) {
+      // Loop through the attachments and download each one
+      this.attachments.forEach((attachment) => {
+        this.downloadImage(attachment.url, attachment.filename);
+      });
+    }
+  }
+
 
   onCancel() {
     this.location.back();

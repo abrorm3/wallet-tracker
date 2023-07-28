@@ -1,70 +1,90 @@
-<div class="container">
-  <div class="header">
-    <h2 class="sectionName">Transaction Information</h2>
-    <div class="operations">
-      <img
-        src="assets/icons/edit-icon.png"
-        alt="edit icon"
-        (click)="editTransaction()"
-      />
-      <img
-        src="assets/icons/delete-icon.png"
-        alt="delete icon"
-        (click)="deleteTransaction()"
-      />
-      <img
-        src="assets/icons/close-icon.png"
-        alt="close icon"
-        (click)="onCancel()"
-      />
-    </div>
-    <!-- <img [src]="transaction.income?'assets/icons/income.png':'assets/icons/expense.png'" alt="money flow icon" style="max-height: 30px;">
+<div id="details">
+  <div class="container">
+    <div class="header">
+      <h2 class="sectionName">Transaction Information</h2>
+      <div class="operations">
+        <img
+          src="assets/icons/edit-icon.png"
+          alt="edit icon"
+          (click)="editTransaction()"
+        />
+        <img
+          src="assets/icons/delete-icon.png"
+          alt="delete icon"
+          (click)="deleteTransaction()"
+        />
+        <img
+          src="assets/icons/close-icon.png"
+          alt="close icon"
+          (click)="onCancel()"
+        />
+      </div>
+      <!-- <img [src]="transaction.income?'assets/icons/income.png':'assets/icons/expense.png'" alt="money flow icon" style="max-height: 30px;">
                 <p class="moneyFlow">{{transaction.income?'Income':'Expense'}}</p> -->
-  </div>
-  <div class="incomeOrExpenseContainer">
-    <div class="incomeOrExpense">
-      <img
-        [src]="
-          transactionData.income
-            ? 'assets/icons/income.png'
-            : 'assets/icons/expense.png'
-        "
-        alt="money flow"
-        width="35px"
-      />
-      <p>{{ transactionData.income ? "Income" : "Expense" }}</p>
     </div>
-    <p
-      class="amount"
-      [class.incomeColor]="transactionData.income === true"
-      [class.expenseColor]="transactionData.income === false"
-    >
-      <span>{{transactionData.income === false?'-':'+'}}</span
-      >{{ transactionData.amount | number : "1.2-2"
-      }}<span>{{ cardCurrency }}</span>
-    </p>
-  </div>
-  <div class="title">
-    <p>{{ transactionData.title }}</p>
-  </div>
-  <div class="categories">
-    <li *ngFor="let category of transactionData.categoryType">
-      <p>{{ category }}</p>
-    </li>
-  </div>
-  <div class="details-flex">
-    <h3>Payment Date:</h3>
-    <p>{{ transactionData.date }}</p>
-  </div>
-  <div class="line"></div>
-  <div class="details-flex">
-    <h3>Description:</h3>
-    <p>{{ transactionData.description }}</p>
-  </div>
-  <button (click)="downloadImg()">Download</button>
+    <div class="incomeOrExpenseContainer">
+      <div class="incomeOrExpense">
+        <img
+          [src]="
+            transactionData.income
+              ? 'assets/icons/income.png'
+              : 'assets/icons/expense.png'
+          "
+          alt="money flow"
+          width="35px"
+        />
+        <p>{{ transactionData.income ? "Income" : "Expense" }}</p>
+      </div>
+      <p
+        class="amount"
+        [class.incomeColor]="transactionData.income === true"
+        [class.expenseColor]="transactionData.income === false"
+      >
+        <span>{{ transactionData.income === false ? "-" : "+" }}</span
+        >{{ transactionData.amount | number : "1.2-2"
+        }}<span>{{ cardCurrency }}</span>
+      </p>
+    </div>
+    <div class="title">
+      <p>{{ transactionData.title }}</p>
+    </div>
+    <div class="categories">
+      <li *ngFor="let category of transactionData.categoryType">
+        <p>{{ category }}</p>
+      </li>
+    </div>
+    <div class="details-flex">
+      <h3>Payment Date:</h3>
+      <p>{{ transactionData.date }}</p>
+    </div>
+    <div class="line"></div>
+    <div class="details-flex">
+      <h3>Description:</h3>
+      <p>{{ transactionData.description }}</p>
+    </div>
+    <div class="line"></div>
+    <div class="attachements">
+      <div class="attachementStart">
+        <img
+          src="assets/icons/image-placeholder.png"
+          alt="imagePlaceholder"
+          width="52px"
+        />
+        <h3>Attachements</h3>
+      </div>
+      <div class="attachementEnd">
+        <button (click)="downloadAttachments()" [attr.disabled]="!attachmentsAvailable ? true : null">
+          <img src="assets/icons/arrowDown.png" alt="arrow" [ngClass]="{ 'disabled-image': !attachmentsAvailable }"/>
+          <p>Download</p>
+        </button>
+      </div>
+    </div>
 
-  <div class="finalBtns">
-    <button type="reset" class="cancel btn" (click)="onCancel()">Close</button>
+    <div class="finalBtns">
+      <button type="reset" class="cancel btn" (click)="onCancel()">
+        Close
+      </button>
+    </div>
   </div>
+  <div class="modal-overlay" (click)="onCancel()"></div>
 </div>
-<div class="modal-overlay" (click)="onCancel()"></div>

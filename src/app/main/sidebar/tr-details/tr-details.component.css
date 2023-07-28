@@ -9,6 +9,8 @@
 }
 
 .container {
+  position: absolute;
+  overflow: scroll;
   width: 39vw;
   background-color: #fff;
   padding: 39px 34px 0 34px;
@@ -111,4 +113,42 @@
 }
 .incomeColor{
   color:#21C206;
+}
+.attachements{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+}
+.attachementStart{
+  display: flex;
+  align-items: center;
+}
+.attachementStart h3{
+  margin-left: 15px;
+  font-size: 20px;
+}
+.attachementEnd button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 165px;
+  height: 49px;
+  background-color: #B9E2E6;
+  border-radius: 10px;
+  cursor: pointer;
+  border:none;
+}
+
+.attachementEnd img{
+  /* padding: 9px */
+  border-radius: 50%;
+}
+.disabled-image {
+  opacity: 0.5; /* Reduce opacity to make it partially transparent */
+  pointer-events: none; /* Disable mouse interactions */
+}
+.attachementEnd p{
+  margin-left: 11px;
+  font-size: 20px;
 }
