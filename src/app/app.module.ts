@@ -23,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { environment } from '../environments/environment';
 import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.component';
-
+import { DeleteConfirmationDialogComponent } from './main/sidebar/tr-details/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.compone
     SecAdminComponent,
     TrEditComponent,
     TrDetailsComponent,
+    DeleteConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,8 @@ import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.compone
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
 
   providers: [

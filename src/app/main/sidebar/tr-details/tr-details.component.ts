@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionsApiService } from 'src/app/shared/transactions-api.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { HttpClient } from '@angular/common/http';
-
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tr-details',
@@ -14,11 +15,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./tr-details.component.css'],
 })
 export class TrDetailsComponent implements OnInit, OnDestroy {
-  transactionData:any;
+  transactionData: any;
   cardCurrency = '$';
   id: string;
   attachmentsAvailable = true;
-attachments: { url: string, filename: string }[] = [];
+  attachments: { url: string; filename: string }[] = [];
 
   constructor(
     private router: Router,
@@ -28,15 +29,17 @@ attachments: { url: string, filename: string }[] = [];
     private authService: AuthService,
     private storage: AngularFireStorage,
     private http: HttpClient,
+    private dialog: MatDialog
   ) {}
 
-
   ngOnInit(): void {
-    this.transactionsApiService.getTransactionData().pipe(take(1))
-    .subscribe((data) => {
-      console.log(data);
-      this.transactionData = data;
-    })
+    this.transactionsApiService
+      .getTransactionData()
+      .pipe(take(1))
+      .subscribe((data) => {
+        console.log(data);
+        this.transactionData = data;
+      });
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     this.downloadImg();
@@ -61,19 +64,34 @@ attachments: { url: string, filename: string }[] = [];
   //   );
   // }
   deleteTransaction() {
-    this.transactionsApiService.deleteTransaction().subscribe({
-      next: (response) => {
-        console.log('Transaction deleted successfully:');
-        this.router.navigate(['main']);
-      },
-      error: (errorMessage) => {
-        console.log(errorMessage);
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: 'auto', // Set width to 'auto' to allow the dialog content to determine the width
+      panelClass: 'custom-dialog-container', // Apply the custom CSS class to the dialog container
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.transactionsApiService.deleteTransaction().subscribe({
+          next: (response) => {
+            console.log('Transaction deleted successfully:');
+            this.router.navigate(['main']);
+          },
+          error: (errorMessage) => {
+            console.log(errorMessage);
+          },
+        });
       }
-  });
+    });
   }
+
   downloadImg() {
-    const folderPath = this.authService.user.value.email + "/" + this.transactionsApiService.getTransactionId();
-    const storageRef = this.storage.refFromURL('gs://wallet-tracker-57bf6.appspot.com/' + folderPath);
+    const folderPath =
+      this.authService.user.value.email +
+      '/' +
+      this.transactionsApiService.getTransactionId();
+    const storageRef = this.storage.refFromURL(
+      'gs://wallet-tracker-57bf6.appspot.com/' + folderPath
+    );
 
     storageRef.listAll().subscribe((result) => {
       // Check if there are any attachments
@@ -116,12 +134,9 @@ attachments: { url: string, filename: string }[] = [];
     }
   }
 
-
   onCancel() {
     this.location.back();
   }
 
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 }
