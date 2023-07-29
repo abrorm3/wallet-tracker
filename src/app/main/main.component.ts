@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit, OnDestroy {
   constructor(private mainCenterService: MainCenterService, private authService: AuthService, private router:Router) {}
-  userEmail = this.authService.user.value.email;
   cards: Card[];
   showFiller = false;
 
@@ -21,9 +20,7 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
   }
-  logOut(){
-    this.authService.logout();
-  }
+
   siteName(){
     this.mainCenterService.selectedSection.next(null);
     this.router.navigate(['/main']);

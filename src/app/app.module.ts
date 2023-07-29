@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.component';
 import { DeleteConfirmationDialogComponent } from './main/sidebar/tr-details/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RightBarComponent } from './main/right-bar/right-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     TrEditComponent,
     TrDetailsComponent,
     DeleteConfirmationDialogComponent,
+    RightBarComponent,
   ],
   imports: [
     BrowserModule,
