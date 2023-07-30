@@ -19,6 +19,7 @@ body {
 }
 #sections {
   margin-bottom: 50px;
+  font-size: 20px;
 }
 #sections ul {
   display: flex;

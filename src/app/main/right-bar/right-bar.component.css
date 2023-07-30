@@ -1,0 +1,17 @@
+#userInfo h6{
+  font-size: 20px;
+  font-weight: 400;
+  color:#373737;
+  margin-left: 7px;
+}
+#userInfo{
+  display: flex;
+}
+.logOut{
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 32px;
+  text-decoration: underline;
+}
+
