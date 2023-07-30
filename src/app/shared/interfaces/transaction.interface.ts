@@ -1,7 +1,7 @@
 export interface FirebaseTransaction {
   amount: number;
   categoryType: string;
-  date: string;
+  date: Date;
   description: string;
   income: boolean;
   title: string;

@@ -26,6 +26,7 @@ import { TrDetailsComponent } from './main/sidebar/tr-details/tr-details.compone
 import { DeleteConfirmationDialogComponent } from './main/sidebar/tr-details/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RightBarComponent } from './main/right-bar/right-bar.component';
+import { SearchPipe } from './main/main-center/search.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { RightBarComponent } from './main/right-bar/right-bar.component';
     TrDetailsComponent,
     DeleteConfirmationDialogComponent,
     RightBarComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

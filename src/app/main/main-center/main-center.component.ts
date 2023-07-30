@@ -23,6 +23,8 @@ export class MainCenterComponent implements OnInit, OnDestroy {
   readonly transactions$ = this.transactionsApiService.getAllTransaction();
   private subscription: Subscription[] = [];
   selected: string | null = null;
+  searchTerm: string = '';
+
   constructor(
     private mainCenterService: MainCenterService,
     private transactionsApiService: TransactionsApiService,
