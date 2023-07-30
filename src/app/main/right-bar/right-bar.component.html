@@ -3,3 +3,13 @@
   <h6>{{userEmail}}</h6>
 </div>
 <button class="logOut" (click)="logOut()">Logout</button>
+<div id="incomeAndExpenseFilter">
+  <div class="income incomeAndExpense" [class.active]="showIncome" (click)="incomeFilter()">
+    <img src="assets/icons/income.png" alt="income arrow">
+    <p>Income</p>
+  </div>
+  <div class="expense incomeAndExpense" [class.active]="showExpense" (click)="expenseFilter()">
+    <img src="assets/icons/expense.png" alt="expense arrow">
+    <p>Expenses</p>
+  </div>
+</div>

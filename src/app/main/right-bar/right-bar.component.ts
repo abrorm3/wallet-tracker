@@ -8,10 +8,19 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class RightBarComponent {
   userEmail = this.authService.user.value.email;
-  
+  showIncome: boolean = false;
+  showExpense: boolean = false;
+
+
   constructor(private authService:AuthService,
     ){}
   logOut(){
     this.authService.logout();
+  }
+  incomeFilter(){
+
+  }
+  expenseFilter(){
+
   }
 }
